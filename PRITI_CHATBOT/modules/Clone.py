@@ -23,6 +23,19 @@ async def clone_txt(client, message):
     if len(message.command) > 1:
         bot_token = message.text.split("/clone", 1)[1].strip()
         mi = await message.reply_text("Please wait while I check the bot token.")
+# --- User Clone Limit (Owner unlimited) ---
+user_id = message.from_user.id
+
+if user_id != int(OWNER_ID):
+    existing_clone = await clonebotdb.find_one({"user_id": user_id})
+    if existing_clone:
+        await mi.edit_text(
+            f"**⚠️ You can clone only 1 bot!**\n"
+            f"**You already cloned:** @{existing_clone['username']}\n\n"
+            f"🗑 Remove clone → `/delclone {existing_clone['token']}`"
+        )
+        return
+
         try:
             ai = Client(bot_token, API_ID, API_HASH, bot_token=bot_token, plugins=dict(root="PRITI_CHATBOT/mplugin"))
             await ai.start()
