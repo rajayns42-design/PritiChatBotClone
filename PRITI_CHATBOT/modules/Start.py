@@ -37,37 +37,3 @@ async def clone_block(client, message):
             ]
         )
     )
-
-
-# ============================
-#  NORMAL COMMANDS STAY SAME
-# ============================
-
-@app.on_message(filters.command("ping"))
-async def ping(_, message):
-    await message.reply_text("🏓 Pong! I'm alive.")
-
-@app.on_message(filters.command("stats"))
-async def stats(_, message):
-    await message.reply_text("📊 Stats: Everything running smoothly.")
-
-@app.on_message(filters.command("gcast"))
-async def gcast(_, message):
-    await message.reply_text("🚀 Broadcast feature available in main bot.")
-
-@app.on_message(filters.command("start"))
-async def start(_, message):
-    await message.reply_text(
-        "**Hello! I'm your cloned chatbot.**\n\n"
-        "Use me normally, but cloning is allowed only in main bot."
-    )
-
-@app.on_message(filters.command("help"))
-async def help_cmd(_, message):
-    await message.reply_text(
-        "**Help Menu**\n\n"
-        "• /ping – check bot status\n"
-        "• /stats – get system stats\n"
-        "• /gcast – use broadcast (main bot only)\n"
-        "• /clone – Go To Clone\n"
-    )
