@@ -86,16 +86,16 @@ async def clone_txt(client, message):
 
         await mi.edit_text("**Cloning process started. Please wait for the bot to start.**")
 
-        try:
-            # ----- SAVE DETAILS -----
-details = {
-    "bot_id": bot.id,
-    "is_bot": True,
-    "user_id": user_id,
-    "name": bot.first_name,
-    "token": bot_token,
-    "username": bot.username,
-}
+try:
+    # ----- SAVE DETAILS -----
+    details = {
+        "bot_id": bot.id,
+        "is_bot": True,
+        "user_id": user_id,
+        "name": bot.first_name,
+        "token": bot_token,
+        "username": bot.username,
+    }
 
 await clonebotdb.insert_one(details)
 CLONES.add(bot.id)
