@@ -135,22 +135,42 @@ async def clone_txt(client, message):
 @app.on_message(filters.command("cloned"))
 async def list_cloned_bots(client, message):
     try:
-        cloned_bots = clonebotdb.find()
-        cloned_bots_list = await cloned_bots.to_list(length=None)
+        user_id = message.from_user.id
 
-        if not cloned_bots_list:
-            await message.reply_text("No bots have been cloned yet.")
-            return
+        # ------------ OWNER: See All Clones ------------
+        if user_id == int(OWNER_ID):
+            cloned_bots = await clonebotdb.find().to_list(length=None)
+            if not cloned_bots:
+                return await message.reply_text("No bots have been cloned yet.")
 
-        total_clones = len(cloned_bots_list)
+            total_clones = len(cloned_bots)
+            text = f"**👑 Total Cloned Bots:** {total_clones}\n\n"
 
-        text = f"**Total Cloned Bots:** {total_clones}\n\n"
-        for bot in cloned_bots_list:
-            text += f"**Bot ID:** `{bot['bot_id']}`\n"
-            text += f"**Bot Name:** {bot['name']}\n"
-            text += f"**Bot Username:** @{bot['username']}\n\n"
+            for bot in cloned_bots:
+                text += (
+                    f"**🤖 Bot Username:** @{bot['username']}\n"
+                    f"**Bot Name:** {bot['name']}\n"
+                    f"**Bot ID:** `{bot['bot_id']}`\n"
+                    f"**Owner ID:** `{bot['user_id']}`\n\n"
+                )
 
-        await message.reply_text(text)
+            return await message.reply_text(text)
+
+        # ------------ USER: See Only Own Clone ------------
+        my_clone = await clonebotdb.find_one({"user_id": user_id})
+
+        if not my_clone:
+            return await message.reply_text("**❌ You have not cloned any bot yet.**")
+
+        # User sees ONLY his bot
+        text = (
+            "**🤖 Your Cloned Bot:**\n\n"
+            f"**Bot Username:** @{my_clone['username']}\n"
+            f"**Bot Name:** {my_clone['name']}\n"
+            f"**Bot ID:** `{my_clone['bot_id']}`\n"
+        )
+
+        return await message.reply_text(text)
 
     except Exception as e:
         logging.exception(e)
