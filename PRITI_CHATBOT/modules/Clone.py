@@ -46,11 +46,12 @@ def _mask_token(token: str) -> str:
 # ---------------------------
 @app.on_message(filters.command(["clone", "host", "deploy"]))
 async def clone_txt(client, message):
-    if len(message.command) <= 1:
-        await message.reply_text("**Provide Bot Token after /clone Command from @Botfather.**\n\n**Example:** `/clone bot token paste here`")
-        return
-
-    bot_token = message.text.split("/clone", 1)[1].strip()
+    """
+    Replacement clone handler:
+    - First checks user's premium / expiry / clones_left (unless bypass)
+    - If user is not premium => show Buy Premium button (and return)
+    - If premium OK => proceed with token validation & cloning
+    """
     user_id = message.from_user.id
 
     # fetch user's premium record (async)
@@ -59,11 +60,11 @@ async def clone_txt(client, message):
     # owners or configured clone owners bypass premium/limits
     bypass_premium = (user_id == int(OWNER_ID)) or (user_id in CLONE_OWNERS)
 
-    # if not bypass, require premium
+    # if not bypass, require premium (show buy prompt even if no token provided)
     if not bypass_premium:
         if not user_data.get("premium", False):
-            # prompt to buy
-            await message.reply_text(
+            # prompt to buy (no token required to show this)
+            return await message.reply_text(
                 "💎 **Premium Required**\n"
                 "Price: ₹99 / 30 Days\n"
                 "Limit: 1 Bot Clone\n\n",
@@ -71,23 +72,28 @@ async def clone_txt(client, message):
                     [[InlineKeyboardButton("💎 Buy Premium", callback_data="buy_premium")]]
                 ),
             )
-            return
 
-        # check expiry
+        # expiry check
         expiry = user_data.get("expiry", 0)
         if expiry < time.time():
             # expire premium in DB
             await clonebotdb.update_one({"user_id": user_id}, {"$set": {"premium": False}})
-            await message.reply_text("⚠️ Your premium expired! Buy again for ₹99.")
-            return
+            return await message.reply_text("⚠️ Your premium expired! Buy again for ₹99.")
 
-        # check clones left
+        # clones left check
         if user_data.get("clones_left", 0) <= 0:
-            await message.reply_text("⚠️ You already used your 1 clone limit.")
-            return
+            return await message.reply_text("⚠️ You already used your 1 clone limit.")
 
-    # proceed cloning attempt
+    # At this point user is bypass or has valid premium.
+    # Now require token argument to proceed with cloning.
+    if len(message.command) <= 1:
+        return await message.reply_text(
+            "**Provide Bot Token after /clone Command from @Botfather.**\n\n**Example:** `/clone bot token paste here`"
+        )
+
+    bot_token = message.text.split("/clone", 1)[1].strip()
     mi = await message.reply_text("Please wait while I check the bot token.")
+
     try:
         ai = Client(bot_token, API_ID, API_HASH, bot_token=bot_token, plugins=dict(root="PRITI_CHATBOT/mplugin"))
         await ai.start()
