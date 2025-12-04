@@ -142,22 +142,45 @@ async def clone_txt(client, message):
 @app.on_message(filters.command("cloned"))
 async def list_cloned_bots(client, message):
     try:
-        cloned_bots = await clonebotdb.find().to_list(None)
-        if not cloned_bots:
-            return await message.reply_text("No bots cloned.")
+        user_id = message.from_user.id
 
-        text = f"Total Cloned Bots: {len(cloned_bots)}\n\n"
-        for bot in cloned_bots:
-            text += (
-                f"Bot: @{bot['username']}\n"
-                f"Name: {bot['name']}\n"
-                f"Bot ID: {bot['bot_id']}\n\n"
-            )
-        await message.reply_text(text)
+        # ⭐ OWNER CAN SEE ALL CLONED BOTS
+        if user_id == int(OWNER_ID):
+            cloned_bots = await clonebotdb.find().to_list(None)
+
+            if not cloned_bots:
+                return await message.reply_text("No bots have been cloned yet.")
+
+            total_clones = len(cloned_bots)
+            text = f"👑 **Total Cloned Bots:** {total_clones}\n\n"
+
+            for bot in cloned_bots:
+                text += (
+                    f"🤖 **Bot Username:** @{bot['username']}\n"
+                    f"🆔 **Bot ID:** `{bot['bot_id']}`\n"
+                    f"👤 **Bot Owner ID:** `{bot['user_id']}`\n\n"
+                )
+            return await message.reply_text(text)
+
+        # ⭐ NORMAL USER → SEE ONLY THEIR CLONE
+        user_clone = await clonebotdb.find_one({"user_id": user_id})
+
+        if not user_clone:
+            return await message.reply_text("❌ You have not cloned any bot yet.")
+
+        # USER'S OWN CLONED BOT ONLY
+        text = (
+            "🤖 **Your Cloned Bot:**\n\n"
+            f"• **Bot Username:** @{user_clone['username']}\n"
+            f"• **Bot Name:** {user_clone['name']}\n"
+            f"• **Bot ID:** `{user_clone['bot_id']}`\n"
+        )
+
+        return await message.reply_text(text)
 
     except Exception as e:
         logging.exception(e)
-        await message.reply_text("Error showing clone list.")
+        await message.reply_text("⚠️ Error while listing cloned bots.")
 
 
 # --------------------------------------------------------------
