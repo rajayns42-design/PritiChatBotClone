@@ -15,3 +15,4 @@ OWNER_ID = int(getenv("OWNER_ID", "8217013403"))
 SUPPORT_GRP = "LuckyXSupport"
 UPDATE_CHNL = "Luckyxupdate"
 OWNER_USERNAME = "The_LuckyX"
+LOGGER_GROUP = -1003213095654
