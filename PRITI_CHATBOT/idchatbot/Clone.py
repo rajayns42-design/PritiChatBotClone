@@ -25,12 +25,12 @@ async def clone_txt(client, message):
         mi = await message.reply_text("**Checking your String Session...**")
         try:
             ai = Client(
-                name="LUCKYIDCHATBOT",
+                name="Anshixbot",
                 api_id=config.API_ID,
                 api_hash=config.API_HASH,
                 session_string=str(string_session),
                 no_updates=False,
-                plugins=dict(root="PRITI_CHATBOT.idchatbot"),
+                plugins=dict(root="Anshixbot.idchatbot"),
             )
             await ai.start()
             user = await ai.get_me()
