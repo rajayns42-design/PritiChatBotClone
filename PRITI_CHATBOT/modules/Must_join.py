@@ -22,7 +22,7 @@ async def must_join_channel(app: Client, msg: Message):
                 await msg.reply_photo(
                     photo="https://envs.sh/Tn_.jpg",
                     caption=(f"**👋 ʜᴇʟʟᴏ {msg.from_user.mention},**\n\n**ʏᴏᴜ ɴᴇᴇᴅ ᴛᴏ ᴊᴏɪɴ ᴛʜᴇ [ᴄʜᴀɴɴᴇʟ]({link}) ᴛᴏ sᴇɴᴅ ᴍᴇssᴀɢᴇs ɪɴ ᴛʜɪs ʙᴏᴛ.**"),
-                    reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("๏ ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ ๏", url=link)]]))
+                    reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("๏ ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ ๏", url="https://t.me/Love_Bot_143")]]))
         
                 await msg.stop_propagation()
             except ChatWriteForbidden:
