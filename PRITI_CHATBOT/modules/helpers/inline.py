@@ -8,12 +8,12 @@ START_BOT = [
     [
         InlineKeyboardButton(
             text="❍ 𝐀ᴅᴅ 𝐌ᴇ 𝐘ᴏᴜʀ 𝐆ʀᴏᴜᴘ ❍",
-            url=f"https://t.me/{PRITI_CHATBOT.username}?startgroup=true",
+            url=f"https://t.me/Anshixbot?startgroup=true",
         ),
     ],
     [
         InlineKeyboardButton(text="❍ 𝐎ᴡɴᴇʀ ❍", user_id=OWNER),
-        InlineKeyboardButton(text="❍ 𝐒ᴜᴘᴘᴏʀᴛ ❍", url=f"https://t.me/{SUPPORT_GRP}"),
+        InlineKeyboardButton(text="❍ 𝐒ᴜᴘᴘᴏʀᴛ ❍", url=f"https://t.me/Love_Ki_Duniyaa"),
     ],
     [
         InlineKeyboardButton(text="❍ 𝐘ᴏᴜʀ 𝐂ᴏᴍᴍᴀɴᴅ ❍", callback_data="HELP"),
@@ -23,13 +23,13 @@ START_BOT = [
 
 DEV_OP = [
     [
-        InlineKeyboardButton(text="❍ 𝐎ᴡɴᴇʀ ❍", user_id=OWNER),
-        InlineKeyboardButton(text="❍ 𝐒ᴜᴘᴘᴏʀᴛ ❍", url=f"https://t.me/{SUPPORT_GRP}"),
+        InlineKeyboardButton(text="❍ 𝐎ᴡɴᴇʀ ❍", user_id=8211189367),
+        InlineKeyboardButton(text="❍ 𝐒ᴜᴘᴘᴏʀᴛ ❍", url=f"https://t.me/Love_Ki_Duniyaa"),
     ],
     [
         InlineKeyboardButton(
             text="❍ 𝐀ᴅᴅ 𝐌ᴇ 𝐘ᴏᴜʀ 𝐆ʀᴏᴜᴘ ❍",
-            url=f"https://t.me/{PRITI_CHATBOT.username}?startgroup=true",
+            url=f"https://t.me/Anshixbot?startgroup=true",
         ),
     ],
     [
@@ -44,7 +44,7 @@ PNG_BTN = [
     [
         InlineKeyboardButton(
             text="❍ 𝐀ᴅᴅ 𝐌ᴇ 𝐘ᴏᴜʀ 𝐆ʀᴏᴜᴘ ❍ ",
-            url=f"https://t.me/{PRITI_CHATBOT.username}?startgroup=true",
+            url=f"https://t.me/Anshixbot?startgroup=true",
         ),
     ],
     [
