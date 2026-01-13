@@ -17,7 +17,7 @@ START_BOT = [
     ],
     [
         InlineKeyboardButton(text="❍ 𝐘ᴏᴜʀ 𝐂ᴏᴍᴍᴀɴᴅ ❍", callback_data="HELP"),
-    ],
+    ]
   
 ]
 
@@ -26,7 +26,7 @@ DEV_OP = [
     [
         InlineKeyboardButton(text="❍ 𝐎ᴡɴᴇʀ ❍", user_id=8211189367),
         InlineKeyboardButton(text="❍ 𝐒ᴜᴘᴘᴏʀᴛ ❍", url=f"https://t.me/Love_Ki_Duniyaa"),
-    ],
+    ]
     [
         InlineKeyboardButton(
             text="❍ 𝐀ᴅᴅ 𝐌ᴇ 𝐘ᴏᴜʀ 𝐆ʀᴏᴜᴘ ❍",
