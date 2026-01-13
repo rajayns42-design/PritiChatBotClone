@@ -8,7 +8,7 @@ START_BOT = [
     [
         InlineKeyboardButton(
             text="❍ 𝐀ᴅᴅ 𝐌ᴇ 𝐘ᴏᴜʀ 𝐆ʀᴏᴜᴘ ❍",
-            url=f"https://t.me/Anshixbot?startgroup=true",
+            url=f("https://t.me/Anshixbot?startgroup=true"),
         ),
     ],
     [
@@ -18,6 +18,7 @@ START_BOT = [
     [
         InlineKeyboardButton(text="❍ 𝐘ᴏᴜʀ 𝐂ᴏᴍᴍᴀɴᴅ ❍", callback_data="HELP"),
     ],
+  
 ]
 
 
@@ -29,7 +30,7 @@ DEV_OP = [
     [
         InlineKeyboardButton(
             text="❍ 𝐀ᴅᴅ 𝐌ᴇ 𝐘ᴏᴜʀ 𝐆ʀᴏᴜᴘ ❍",
-            url=f"https://t.me/Anshixbot?startgroup=true",
+            url=f("https://t.me/Anshixbot?startgroup=true)",
         ),
     ],
     [
@@ -44,7 +45,7 @@ PNG_BTN = [
     [
         InlineKeyboardButton(
             text="❍ 𝐀ᴅᴅ 𝐌ᴇ 𝐘ᴏᴜʀ 𝐆ʀᴏᴜᴘ ❍ ",
-            url=f"https://t.me/Anshixbot?startgroup=true",
+            url=f"(https://t.me/Anshixbot?startgroup=true"),
         ),
     ],
     [
